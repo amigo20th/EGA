@@ -1,5 +1,6 @@
 import numpy as np
 import functools
+import Fitness
 
 def makeGen(l_gen):
     # This function make a string with (0,1) of length l_gen
@@ -101,7 +102,7 @@ for gen in range(G):
     count = 0
     for i in range(fitness_double.shape[1]):
         fitness_double[0][i] = count
-        fitness_double[1][i] = np.random.random(1)
+        fitness_double[1][i] = fitness
         count += 1
     print(fitness_double)
     # Order by fitness
