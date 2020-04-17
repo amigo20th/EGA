@@ -1,6 +1,6 @@
 import numpy as np
 import functools
-import Fitness
+import Fitness_linear_eq as fle
 
 def makeGen(l_gen):
     # This function make a string with (0,1) of length l_gen
@@ -57,14 +57,14 @@ def mutation(I_double, n, len_v, n_var, B2M):
 
 ### Variables for flexibility of the algorithm
 # number of variables for one solution
-n_vars = 2
+n_vars = 5
 # lenght of bits for each variable
-len_v = 16
+len_v = 32
 ### Variables what EGA needs
 # Number of generations
-G = 2
+G = 1000
 # Number of individuals
-n = 10
+n = 50
 # Length of chromosome
 L = n_vars * len_v
 # Population
@@ -102,25 +102,20 @@ for gen in range(G):
     count = 0
     for i in range(fitness_double.shape[1]):
         fitness_double[0][i] = count
-        fitness_double[1][i] = fitness
+        fitness_double[1][i] = fle.fitness(I_double[i][0], I_double[i][1])
         count += 1
-    print(fitness_double)
     # Order by fitness
     fitness_double = fitness_double[:, fitness_double[1].argsort()]
 
     # Apply Elitism
     ind_eli = fitness_double[0][0:n]
     ind_eli = np.array(ind_eli, dtype='int32')
-    print(ind_eli)
-    print("Antes")
-
-    print(I)
     count = 0
     for i in ind_eli:
         I[count] = I_double[i]
         count += 1
-    print("Despues")
-    print(I)
+    print("Generation {}, MSE= {}".format(gen+1, fitness_double[1][0]))
+print("Aproaches: ")
+print("x= ", fle.bin2float(I[0][0]))
+print("y= ", fle.bin2float(I[0][1]))
 
-    print()
-    print(I_double)
