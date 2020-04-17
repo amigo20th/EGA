@@ -2,6 +2,7 @@ import numpy as np
 import functools
 import Fitness_linear_eq as fle
 
+
 def makeGen(l_gen):
     # This function make a string with (0,1) of length l_gen
     gen = ""
