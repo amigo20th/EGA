@@ -1,7 +1,6 @@
 import numpy as np
 import functools
-import Fitness_linear_eq as fle
-
+import Travelling_Salesman_Problem as TSP
 
 def makeGen(l_gen):
     # This function make a string with (0,1) of length l_gen
@@ -58,9 +57,9 @@ def mutation(I_double, n, len_v, n_var, B2M):
 
 ### Variables for flexibility of the algorithm
 # number of variables for one solution
-n_vars = 5
+n_vars = 8
 # lenght of bits for each variable
-len_v = 32
+len_v = 3
 ### Variables what EGA needs
 # Number of generations
 G = 1000
@@ -103,7 +102,7 @@ for gen in range(G):
     count = 0
     for i in range(fitness_double.shape[1]):
         fitness_double[0][i] = count
-        fitness_double[1][i] = fle.fitness(I_double[i][0], I_double[i][1])
+        fitness_double[1][i] = TSP.fitness(I_double[i])
         count += 1
     # Order by fitness
     fitness_double = fitness_double[:, fitness_double[1].argsort()]
@@ -115,8 +114,8 @@ for gen in range(G):
     for i in ind_eli:
         I[count] = I_double[i]
         count += 1
-    print("Generation {}, MSE= {}".format(gen+1, fitness_double[1][0]))
+    print("Generation {}, Cost Travel= {}".format(gen+1, fitness_double[1][0]))
+    print("Best Order: ", I[0])
 print("Aproaches: ")
-print("x= ", fle.bin2float(I[0][0]))
-print("y= ", fle.bin2float(I[0][1]))
+print("Mejor orden: ", I[0])
 
