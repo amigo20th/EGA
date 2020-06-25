@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def linear_ecu(x, y):
     # The linear equation
     ecua1 = (-5.*x) + (16.*y)
@@ -16,6 +15,7 @@ def fitness(x, y):
     y_f = bin2float(y)
     ec1, ec2 = linear_ecu(x_f, y_f)
     return MSE(ec1, ec2)
+
 def bin2float(str_bin):
     # This function turn a binary string into a float with 3 digits of significance
     bin = 0
